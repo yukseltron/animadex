@@ -1,6 +1,4 @@
-import wikipedia
 from ClarifaiParse import ClarifaiParse
-from bs4 import BeautifulSoup
 import pywikibot
 
 
