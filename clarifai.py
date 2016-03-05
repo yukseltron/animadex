@@ -27,7 +27,7 @@ class ClarifaiParse:
         except IOError:
             print("can't open", filename)
             return []
-        except Error as e:
+        except Exception as e:
             print(e)
             return []
 
