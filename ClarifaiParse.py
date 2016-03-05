@@ -4,10 +4,9 @@ class ClarifaiParse:
     def __init__(self, app_id=None, app_secret=None):
         self.api = ClarifaiApi(app_id, app_secret)
 
-    def parse(self, filename):
+    def parse(self, url):
         try:
-            image = open(filename, "rb")
-            api_result = self.api.tag_images(image)
+            api_result = self.api.tag_image_urls(url)
             
             if api_result["status_code"] == "OK":
                 matches = []
