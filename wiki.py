@@ -1,32 +1,39 @@
 from ClarifaiParse import ClarifaiParse
-import pywikibot
 import json
+import wikipedia
+from bs4 import BeautifulSoup
+import httplib2
 
 class WikiParse:
     def __init__(self):
         app_id = "aoaEzeM8d6fiL2L1eX--OtjXFAaPe_CDo6zFvEJD"
         app_secret = "fjhnJKSdHcZJACroOvCCoNf4tgi9YlOQpi52z-Pb"
         self.c = ClarifaiParse(app_id, app_secret)
+    
+    def is_animal(self, url, http):
+        status, response = http.request(url)
+        soup = BeautifulSoup(response, "lxml")
+        table = soup.find("table", {"class":"infobox biota"})
+        
+        return table != None
 
     def get_matches(self, name):
         matches = []
-        site = pywikibot.Site()
+        http = httplib2.Http()
         
         for result in self.c.parse(name):
             name = result["tag"]
             try:
-                page = pywikibot.Page(site, name)
-                t = page.get()
-                if "taxobox" in t.lower() or "speciesbox" in t.lower():
-                    print(name, "is found")
-                    result["wiki"] = t
-                    matches.append(t)
+                wiki_response = wikipedia.WikipediaPage(name)
+                if self.is_animal(wiki_response.url, http):
+                    print(name, "is a real and relevant article")
+                    result["summary"] = wiki_response.summary
+                    matches.append(result)
                     
-            except pywikibot.exceptions.NoPage:
-                print(name, "page does not exist")
+            except wikipedia.exceptions.DisambiguationError as e:
                 continue
-            except pywikibot.exceptions.IsRedirectPage:
-                print(name, "is a redirect page")
+            except wikipedia.exceptions.PageError as e:
+                print(name, "is not a real article")
                 continue
             
         return json.dumps(matches)
