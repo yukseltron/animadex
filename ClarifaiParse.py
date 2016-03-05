@@ -1,8 +1,8 @@
 from clarifai.client import ClarifaiApi
 
 class ClarifaiParse:
-    def __init__(self):
-        self.api = ClarifaiApi()
+    def __init__(self, app_id=None, app_secret=None):
+        self.api = ClarifaiApi(app_id, app_secret)
 
     def parse(self, filename):
         try:
