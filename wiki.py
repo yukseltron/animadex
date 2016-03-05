@@ -8,7 +8,7 @@ class WikiParse:
         app_secret = "fjhnJKSdHcZJACroOvCCoNf4tgi9YlOQpi52z-Pb"
         self.c = ClarifaiParse(app_id, app_secret)
 
-    def get_matches(self, name="earthworm.jpg"):
+    def get_matches(self, name):
         matches = []
         site = pywikibot.Site()
         
@@ -21,6 +21,7 @@ class WikiParse:
                     print(name, "is found")
                     result["wiki"] = t
                     matches.append(t)
+                    
             except pywikibot.exceptions.NoPage:
                 print(name, "page does not exist")
                 continue
