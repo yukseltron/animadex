@@ -1,20 +1,31 @@
 import wikipedia
 from ClarifaiParse import ClarifaiParse
 from bs4 import BeautifulSoup
+import pywikibot
+
 
 def run():
-    c = ClarifaiParse()
-    for result in c.parse("earthworm.jpg"):
-     
-        try:
-            page = wikipedia.WikipediaPage(result["tag"])
-            html = page.html()
-            print(result["tag"], "infobox biota" in html)
+    app_id = "aoaEzeM8d6fiL2L1eX--OtjXFAaPe_CDo6zFvEJD"
+    app_secret = "fjhnJKSdHcZJACroOvCCoNf4tgi9YlOQpi52z-Pb"
+    c = ClarifaiParse(app_id, app_secret)
+    
+    site = pywikibot.Site()
 
-        except wikipedia.exceptions.PageError:
-            print("page not found for", result["tag"])
+
+    for result in c.parse("earthworm.jpg"):
+        name = result["tag"]
+        try:
+            page = pywikibot.Page(site, name)
+            s = page.title
+            t = page.get()
+            print(result, "{{Taxobox" in t or "{{speciesbox" in t)
+        except pywikibot.exceptions.NoPage:
+            print(name, "page does not exist")
             continue
-        except Exception as e:
+        except pywikibot.exceptions.IsRedirectPage:
+            print(name, "is a redirect page")
             continue
+
+
 
 run()
