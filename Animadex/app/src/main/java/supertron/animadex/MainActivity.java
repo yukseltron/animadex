@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -27,9 +28,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.camera.R;
-
+import java.net.URL;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Set;
+import java.net.*;
+import java.io.*;
+
 
 public class MainActivity extends ActionBarActivity {
     Button b1,b2;
@@ -48,6 +53,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 0);
+
             }
         });
     }
@@ -58,6 +64,14 @@ public class MainActivity extends ActionBarActivity {
 
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         iv.setImageBitmap(bp);
+
+        String wurl = "http://40.76.35.232/find/";
+        String imurl = "https://www.petfinder.com/wp-content/uploads/2012/11/140272627-grooming-needs-senior-cat-632x475.jpg";
+        try {
+            URL aURL = new URL(wurl + imurl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
