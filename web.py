@@ -7,12 +7,11 @@ app = Flask(__name__)
 def hello():
     return "Beware of jeff"
 
-@app.route("/find")
-def find():
-    w = WikiParse()
-    inputUrl = input("url")
+@app.route("/find/<path:url>")
+def find(url):
+    w = WikiParse()    
+    matches = w.get_matches(url)
     
-    matches = w.get_matches(inputUrl)
     return matches
 
 if __name__ == "__main__":
