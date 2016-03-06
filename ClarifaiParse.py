@@ -4,10 +4,9 @@ class ClarifaiParse:
     def __init__(self, app_id=None, app_secret=None):
         self.api = ClarifaiApi(app_id, app_secret)
 
-    def parse(self, filename):
+    def parse(self, url):
         try:
-            image = open(filename, "rb")
-            api_result = self.api.tag_images(image)
+            api_result = self.api.tag_image_urls(url)
             
             if api_result["status_code"] == "OK":
                 matches = []
@@ -32,6 +31,11 @@ class ClarifaiParse:
             return []
 
 if __name__ == "__main__":
-    c = ClarifaiParse()
-    results = c.parse("earthworm.jpg")
+    app_id = "aoaEzeM8d6fiL2L1eX--OtjXFAaPe_CDo6zFvEJD"
+    app_secret = "fjhnJKSdHcZJACroOvCCoNf4tgi9YlOQpi52z-Pb"
+    
+    c = ClarifaiParse(app_id, app_secret)
+    url = "http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/A-G/gray-wolf-snow.jpg.adapt.945.1.jpg"
+    
+    results = c.parse(url)
     print(results)
