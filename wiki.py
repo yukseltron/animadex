@@ -17,18 +17,22 @@ class WikiParse:
         
         return table != None
 
-    def get_matches(self, name):
+    def get_matches(self, name, max_count=3):
         matches = []
         http = httplib2.Http()
-        
+
+        i = 0
         for result in self.c.parse(name):
+            if i >= max_count: break
             name = result["tag"]
+            
             try:
                 wiki_response = wikipedia.WikipediaPage(name)
                 if self.is_animal(wiki_response.url, http):
                     print(name, "is a real and relevant article")
                     result["summary"] = wiki_response.summary
                     matches.append(result)
+                    i += 1
                     
             except wikipedia.exceptions.DisambiguationError as e:
                 continue
