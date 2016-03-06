@@ -1,4 +1,4 @@
-package com.animadex.animadex;
+package com.animadex;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

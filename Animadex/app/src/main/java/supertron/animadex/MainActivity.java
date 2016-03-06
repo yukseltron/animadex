@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.net.*;
 import java.io.*;
+import android.app.Activity;
+import android.view.MotionEvent;
 
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.blob.*;
@@ -102,4 +104,6 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

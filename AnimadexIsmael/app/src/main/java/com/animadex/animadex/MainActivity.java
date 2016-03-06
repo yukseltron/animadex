@@ -1,4 +1,4 @@
-package com.animadex.animadex;
+package com.animadex;
 
 import android.content.Intent;
 import android.provider.MediaStore;

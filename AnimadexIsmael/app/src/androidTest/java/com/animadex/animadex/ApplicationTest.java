@@ -1,4 +1,4 @@
-package com.animadex.animadex;
+package com.animadex;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

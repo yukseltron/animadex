@@ -1,42 +1,72 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
-
-    <TextView android:text="Camera Example" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview"
-        android:textSize="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tutorials point"
-        android:id="@+id/textView"
-        android:layout_below="@+id/textview"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ff7aff24"
-        android:textSize="35dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/abc"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+    tools:context="com.animadex.animadex.MainActivity"
+    android:background="#b82323"
+    android:clickable="false"
+    android:backgroundTintMode="screen">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="camera"
         android:id="@+id/button"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp" />
+        android:layout_marginTop="86dp"
+        android:layout_x="44dp"
+        android:layout_y="441dp" />
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:id="@+id/mainLight"
+        android:background="@drawable/main_light"
+        android:layout_row="11"
+        android:layout_column="3"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/redLight"
+        android:background="@drawable/red_light"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/mainLight"
+        android:layout_toEndOf="@+id/mainLight"
+        android:layout_x="113dp"
+        android:layout_y="4dp" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/yellowLight"
+        android:background="@drawable/yellow_light"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/redLight"
+        android:layout_toEndOf="@+id/redLight"
+        android:layout_x="160dp"
+        android:layout_y="10dp"
+        android:src="ww" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/greenLight"
+        android:background="@drawable/green_light"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/yellowLight"
+        android:layout_toEndOf="@+id/yellowLight"
+        android:layout_x="72dp"
+        android:layout_y="3dp" />
+
+
+</AbsoluteLayout>
