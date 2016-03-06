@@ -24,5 +24,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.microsoft.azure.android:azure-storage-android:0.7.0@aar'
+    compile files ('libs/cloudinary-android-1.2.2.jar')
+    compile files ('libs/cloudinary-core-1.2.2.jar')
+
 
 }

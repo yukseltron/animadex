@@ -27,14 +27,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cloudinary.utils.ObjectUtils;
 import com.example.camera.R;
 import java.net.URL;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.net.*;
 import java.io.*;
 
+import com.cloudinary.*;
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.blob.*;
 
@@ -55,25 +60,45 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 0);
-
             }
         });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
 
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         iv.setImageBitmap(bp);
 
-        String wurl = "http://40.76.35.232/find/";
-        String imurl = "https://www.petfinder.com/wp-content/uploads/2012/11/140272627-grooming-needs-senior-cat-632x475.jpg";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+        InputStream is = new ByteArrayInputStream(stream.toByteArray());
+
+        Map config = new HashMap();
+        config.put("cloud_name", "dvnq7uunf");
+        config.put("api_key", "421726614586681");
+        config.put("api_secret", "Pi6prfu2uXGfrsokGAyfutLdw0A");
+        Cloudinary cloudinary = new Cloudinary(config);
+        System.out.println("Connecting to cloudinary");
+
         try {
-            URL aURL = new URL(wurl + imurl);
-        } catch (MalformedURLException e) {
+            Map upload = cloudinary.uploader().upload(is, ObjectUtils.emptyMap());
+            String publicID = (String) upload.get("public_id");
+            System.out.println(publicID);
+
+            String base_url = "http://40.76.35.232/find/";
+
+            String image_url = publicID;
+
+            URL url = new URL(base_url + image_url);
+            Scanner s = new Scanner(url.openStream());
+            String json = s.nextLine();
+            System.out.println(json);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
