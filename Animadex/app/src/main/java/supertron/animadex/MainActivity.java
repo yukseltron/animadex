@@ -35,6 +35,8 @@ import java.util.Set;
 import java.net.*;
 import java.io.*;
 
+import com.microsoft.azure.storage.*;
+import com.microsoft.azure.storage.blob.*;
 
 public class MainActivity extends ActionBarActivity {
     Button b1,b2;
